@@ -15,8 +15,9 @@
                 @endif
             </div>
 
-            <div class="h-64 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 mb-6">
-                {{ __('No Image') }}
+            <div class="h-64 rounded-md overflow-hidden mb-6">
+                <img src="{{ !empty($property->images) ? $property->images[0] : 'https://picsum.photos/seed/property-'.$property->id.'/1200/600' }}"
+                    alt="{{ $property->title }}" class="w-full h-full object-cover">
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-center">
