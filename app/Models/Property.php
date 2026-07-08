@@ -85,4 +85,13 @@ class Property extends Model
     {
         $query->where('type', $type);
     }
+
+    public function scopeBedrooms(Builder $query, int $count): void
+    {
+        if ($count >= 4) {
+            $query->where('bedrooms', '>=', 4);
+        } else {
+            $query->where('bedrooms', $count);
+        }
+    }
 }

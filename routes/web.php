@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\PropertyController as DashboardPropertyContro
 use App\Http\Controllers\Dashboard\ReelController as DashboardReelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyEnquiryController;
 use App\Http\Controllers\ReelController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PropertyController::class, 'home'])->name('home');
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+Route::post('/properties/{property}/enquiry', [PropertyEnquiryController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('properties.enquiry');
 Route::get('/reels', [ReelController::class, 'index'])->name('reels.index');
 Route::view('/contact', 'contact')->name('contact');
 
