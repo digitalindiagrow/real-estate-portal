@@ -62,12 +62,12 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         @if ($type)
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div class="lg:col-span-1">
                     @include('properties.partials.sidebar-filters')
                 </div>
 
-                <div class="lg:col-span-3">
+                <div class="lg:col-span-4">
                     <div class="flex items-center justify-between mb-4">
                         <p class="text-sm text-gray-500">{{ __('Showing :count Properties', ['count' => number_format($properties->total())]) }}</p>
                         <form method="GET" class="flex items-center gap-2">
@@ -87,7 +87,7 @@
                     @if ($properties->isEmpty())
                         <p class="text-gray-500">{{ __('No properties match your search.') }}</p>
                     @else
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
                             @foreach ($properties as $property)
                                 @include('properties.partials.featured-card', ['property' => $property])
                             @endforeach

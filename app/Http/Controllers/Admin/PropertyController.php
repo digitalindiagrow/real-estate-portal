@@ -38,6 +38,7 @@ class PropertyController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'type' => ['required', 'in:sale,rent'],
+            'category' => ['required', 'in:apartment,villa,independent_house,plot,penthouse,studio_apartment'],
             'price' => ['required', 'numeric', 'min:0'],
             'city' => ['required', 'string', 'max:255'],
             'area' => ['required', 'string', 'max:255'],
@@ -45,6 +46,9 @@ class PropertyController extends Controller
             'bedrooms' => ['nullable', 'integer', 'min:0'],
             'bathrooms' => ['nullable', 'integer', 'min:0'],
             'size_sqft' => ['nullable', 'integer', 'min:0'],
+            'furnishing' => ['nullable', 'in:furnished,semi_furnished,unfurnished'],
+            'preferred_for' => ['nullable', 'in:family,bachelor,company_lease'],
+            'possession_status' => ['nullable', 'in:ready_to_move,under_construction'],
         ]);
 
         $property->update($data);

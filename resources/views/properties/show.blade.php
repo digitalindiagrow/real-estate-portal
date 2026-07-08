@@ -68,6 +68,19 @@
                         {{ $property->area }}, {{ $property->city }}
                     </p>
 
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="text-xs font-medium text-gray-600 bg-gray-100 rounded-full px-3 py-1">{{ __(str_replace('_', ' ', ucfirst($property->category))) }}</span>
+                        @if ($property->furnishing)
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 rounded-full px-3 py-1">{{ __(str_replace('_', ' ', ucfirst($property->furnishing))) }}</span>
+                        @endif
+                        @if ($property->type === 'rent' && $property->preferred_for)
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 rounded-full px-3 py-1">{{ __('Preferred: :for', ['for' => str_replace('_', ' ', ucfirst($property->preferred_for))]) }}</span>
+                        @endif
+                        @if ($property->type === 'sale' && $property->possession_status)
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 rounded-full px-3 py-1">{{ __(str_replace('_', ' ', ucfirst($property->possession_status))) }}</span>
+                        @endif
+                    </div>
+
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5 bg-gray-50 rounded-xl p-4">
                         <div>
                             <p class="text-lg font-bold text-gray-800">&#8377;{{ number_format($property->price) }}{{ $property->type === 'rent' ? '/mo' : '' }}</p>

@@ -18,6 +18,7 @@ class Property extends Model
         'title',
         'description',
         'type',
+        'category',
         'price',
         'city',
         'area',
@@ -25,6 +26,9 @@ class Property extends Model
         'bedrooms',
         'bathrooms',
         'size_sqft',
+        'furnishing',
+        'preferred_for',
+        'possession_status',
         'images',
         'status',
         'is_featured',
@@ -93,5 +97,25 @@ class Property extends Model
         } else {
             $query->where('bedrooms', $count);
         }
+    }
+
+    public function scopeOfCategory(Builder $query, string $category): void
+    {
+        $query->where('category', $category);
+    }
+
+    public function scopeFurnishedAs(Builder $query, string $furnishing): void
+    {
+        $query->where('furnishing', $furnishing);
+    }
+
+    public function scopePreferredForType(Builder $query, string $preferredFor): void
+    {
+        $query->where('preferred_for', $preferredFor);
+    }
+
+    public function scopeWithPossessionStatus(Builder $query, string $status): void
+    {
+        $query->where('possession_status', $status);
     }
 }

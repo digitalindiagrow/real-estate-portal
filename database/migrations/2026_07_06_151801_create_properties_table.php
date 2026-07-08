@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('type', ['sale', 'rent']);
+            $table->enum('category', ['apartment', 'villa', 'independent_house', 'plot', 'penthouse', 'studio_apartment'])->default('apartment')->index();
             $table->decimal('price', 12, 2);
             $table->string('city')->index();
             $table->string('area')->index();
@@ -24,6 +25,9 @@ return new class extends Migration
             $table->unsignedTinyInteger('bedrooms')->nullable();
             $table->unsignedTinyInteger('bathrooms')->nullable();
             $table->unsignedInteger('size_sqft')->nullable();
+            $table->enum('furnishing', ['furnished', 'semi_furnished', 'unfurnished'])->nullable();
+            $table->enum('preferred_for', ['family', 'bachelor', 'company_lease'])->nullable();
+            $table->enum('possession_status', ['ready_to_move', 'under_construction'])->nullable();
             $table->json('images')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending')->index();
             $table->boolean('is_featured')->default(false)->index();

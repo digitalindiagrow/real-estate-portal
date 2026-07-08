@@ -48,6 +48,22 @@ class PropertyController extends Controller
             $query->bedrooms((int) $request->input('bedrooms'));
         }
 
+        if ($request->filled('category')) {
+            $query->ofCategory($request->string('category'));
+        }
+
+        if ($request->filled('furnishing')) {
+            $query->furnishedAs($request->string('furnishing'));
+        }
+
+        if ($request->filled('preferred_for')) {
+            $query->preferredForType($request->string('preferred_for'));
+        }
+
+        if ($request->filled('possession_status')) {
+            $query->withPossessionStatus($request->string('possession_status'));
+        }
+
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->input('min_price'));
         }

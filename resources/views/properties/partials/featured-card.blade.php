@@ -14,7 +14,9 @@
     <div class="p-4">
         <h3 class="font-semibold text-gray-800 truncate">{{ $property->title }}</h3>
         <p class="text-sm text-gray-500">{{ $property->area }}, {{ $property->city }}</p>
-        <p class="text-xs text-gray-400 mb-2">{{ $property->bedrooms ? $property->bedrooms.' BHK' : ucfirst($property->type) }}</p>
+        <p class="text-xs text-gray-400 mb-2">
+            {{ $property->bedrooms ? $property->bedrooms.' BHK • ' : '' }}{{ str_replace('_', ' ', ucfirst($property->category)) }}{{ $property->size_sqft ? ' • '.number_format($property->size_sqft).' Sq.Ft.' : '' }}
+        </p>
         <p class="text-brand-600 font-bold mb-3">&#8377;{{ number_format($property->price) }}{{ $property->type === 'rent' ? '/mo' : '' }}</p>
         <a href="{{ route('properties.show', $property) }}" class="block text-center bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold py-2 rounded-lg">
             {{ __('View Details') }}

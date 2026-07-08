@@ -15,8 +15,8 @@ class PropertySeeder extends Seeder
     {
         $sellers = User::where('role', 'user')->get();
 
-        Property::factory()->count(8)->for($sellers->random())->create();
-        Property::factory()->featured()->count(3)->for($sellers->random())->create();
+        Property::factory()->count(30)->for($sellers->random())->create();
+        Property::factory()->featured()->count(6)->for($sellers->random())->create();
         Property::factory()->pending()->count(3)->for($sellers->random())->create();
         Property::factory()->rejected()->count(2)->for($sellers->random())->create();
     }

@@ -28,6 +28,7 @@ class PropertyFactory extends Factory
         $city = $this->faker->randomElement(array_keys(self::CITY_AREAS));
         $area = $this->faker->randomElement(self::CITY_AREAS[$city]);
         $type = $this->faker->randomElement(['sale', 'rent']);
+        $category = $this->faker->randomElement(['apartment', 'villa', 'independent_house', 'plot', 'penthouse', 'studio_apartment']);
 
         return [
             'user_id' => User::factory(),
@@ -36,15 +37,19 @@ class PropertyFactory extends Factory
             ]).' in '.$area,
             'description' => $this->faker->paragraph(4),
             'type' => $type,
+            'category' => $category,
             'price' => $type === 'rent'
                 ? $this->faker->numberBetween(10, 80) * 1000
                 : $this->faker->numberBetween(20, 300) * 100000,
             'city' => $city,
             'area' => $area,
             'address' => $this->faker->streetAddress(),
-            'bedrooms' => $this->faker->numberBetween(1, 5),
-            'bathrooms' => $this->faker->numberBetween(1, 4),
+            'bedrooms' => $category === 'plot' ? null : $this->faker->numberBetween(1, 5),
+            'bathrooms' => $category === 'plot' ? null : $this->faker->numberBetween(1, 4),
             'size_sqft' => $this->faker->numberBetween(400, 3500),
+            'furnishing' => $category === 'plot' ? null : $this->faker->randomElement(['furnished', 'semi_furnished', 'unfurnished']),
+            'preferred_for' => $type === 'rent' ? $this->faker->randomElement(['family', 'bachelor', 'company_lease']) : null,
+            'possession_status' => $type === 'sale' ? $this->faker->randomElement(['ready_to_move', 'under_construction']) : null,
             'images' => [],
             'status' => 'approved',
             'is_featured' => false,
